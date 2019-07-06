@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ypc.kafka.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.ypc.kafka.entity.Order">
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="province" jdbcType="VARCHAR" property="province" />
+    <result column="city" jdbcType="VARCHAR" property="city" />
+    <result column="street" jdbcType="VARCHAR" property="street" />
+    <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    user_id, province, city, street, order_id, status
+  </sql>
+
+  <insert id="insert" parameterType="com.ypc.kafka.entity.Order">
+    insert into t_order (user_id, province, city, 
+      street, order_id, status
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.ypc.kafka.entity.Order">
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>
